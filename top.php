@@ -38,6 +38,7 @@ $recommend_array = $statement;
             <time >：<?php echo $recommend["post_date"]; ?></time>
           </div>
         </div>
+        <hr>
       </article>
     <?php endforeach ?>
   </section>

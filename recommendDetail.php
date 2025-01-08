@@ -26,6 +26,50 @@ $statement->execute();
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
+
+
+$error_message = array();
+
+if(isset($_POST["submitButton"])) {
+
+  if(empty($_POST["userName"])) {
+    $error_message["userName"] ="名前を入力してください";
+  } else {
+    $escaped["userName"] = htmlspecialchars($_POST["userName"], ENT_QUOTES, "UTF-8");
+  }
+
+  if(empty($_POST["content"])) {
+    $error_message["content"] ="  コメントを入力してください。";
+  } else {
+    $escaped["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, "UTF-8");
+  }
+
+if(empty($error_message)) {
+
+  $post_date = date("Y-m-d H:i:s");
+
+  $sql = "INSERT INTO `posts` (`recommend_id`, `userName`, `content`,`created_at`) VALUES (:recommend_id, :userName,:content,:created_at);";
+
+  $statement = $pdo->prepare($sql);
+
+  $statement->bindParam(":recommend_id",$recommend_id,PDO::PARAM_STR);
+
+  $statement->bindParam(":userName", $escaped["userName"],PDO::PARAM_STR);
+
+  $statement->bindParam(":created_at", $post_date,PDO::PARAM_STR);
+
+  $statement->bindParam(":content", $escaped["content"],PDO::PARAM_STR);
+
+
+  $statement->execute();
+
+  header("Location: recommendDetail.php?id=" . $recommend_id);
+  exit;
+
+}
+
+}
+
 ?>
 
 
@@ -41,6 +85,7 @@ $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="title"><a href="top.php">myレコ</a></h1>
   </header>
 <body>
+
 <div class="recommendWrapper">
 
   <div class="titleArea">
@@ -63,6 +108,26 @@ $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
   <p class=""><?php echo $recommend["message"]; ?></p>
   </div>
 </div>
+<hr>
+<h3>コメントを書き込む</h3>
+<form action="recommendDetail.php?id=<?php echo $recommend_id; ?>" class="commentForm" method="POST">
+    <span>名前：</span>
+    <input type="text" name="userName">
+    <span>コメント：</span>
+    <textarea name="content"></textarea>
+    <input type="submit" name="submitButton" value="書き込む">
+
+
+</form>
+<?php if(isset($error_message)) : ?>
+  <ul class="errorMessage">
+    <?php foreach($error_message as $error) : ?>
+      <li><?php echo $error ?></li>
+
+    <?php endforeach;?>
+
+  </ul>
+<?php endif; ?>
 <hr>
   <section>
     <?php foreach ($posts as $post) : ?>

@@ -32,7 +32,7 @@ $recommend_array = $statement;
         <div class ="wrapper">
           <div class="titleArea">
             <span>タイトル：</span>
-            <p class=""><?php echo $recommend["title"]; ?></p>
+            <p class=""><a href="recommendDetail.php?id=<?php echo $recommend['id']; ?>"><?php echo $recommend["title"]; ?></a></p>
             <span>投稿者：</span>
             <p class=""><?php echo $recommend["userName"]; ?></p>
             <time >：<?php echo $recommend["post_date"]; ?></time>

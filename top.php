@@ -23,7 +23,8 @@ $recommend_array = $statement;
 </head>
 <body>
   <header>
-    <h1 class="title">myレコ</h1>
+    <h1 class="title"><a href="top.php">myレコ</a></h1>
+    <h2 class="register"><a href="createRecommend.php">レコメンドを投稿する</a></h2>
   </header>
   <section>
     <?php foreach ($recommend_array as $recommend) : ?>

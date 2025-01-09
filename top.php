@@ -5,7 +5,7 @@ include_once("connect.php");
 
 $recommend_array = array();
 
-$sql = "SELECT * FROM recommend";
+$sql = "SELECT r.*, COUNT(p.id) AS posts_count  FROM recommend r LEFT JOIN posts p ON r.id = p.recommend_id GROUP BY r.id ORDER BY posts_count DESC, r.post_date DESC";
 $statement = $pdo->prepare($sql);
 $statement->execute();
 
@@ -36,6 +36,8 @@ $recommend_array = $statement;
             <span>投稿者：</span>
             <p class=""><?php echo $recommend["userName"]; ?></p>
             <time >：<?php echo $recommend["post_date"]; ?></time>
+            <span>コメント数</span>
+            <p><?php echo $recommend["posts_count"]; ?></p>
           </div>
         </div>
         <hr>

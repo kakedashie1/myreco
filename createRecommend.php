@@ -75,7 +75,7 @@ if(empty($error_message)) {
 </head>
 <body>
   <header>
-    <h1 class="title"><a href="top.php">myレコ</a></h1>
+    <h1 class="title"><a href="index.php">myレコ</a></h1>
   </header>
 <form class="formWrapper" method="POST">
   <div class="titleWrapper">

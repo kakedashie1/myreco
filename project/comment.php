@@ -2,29 +2,36 @@
 
 include("../database/connect.php");
 
-if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
+if (!isset($_GET['post_id']) || !ctype_digit($_GET['post_id'])) {
   exit('不正なアクセスです');
 }
 
-$recommend_id = (int)$_GET['id'];
+if (!isset($_GET['recommend_id']) || !ctype_digit($_GET['recommend_id'])) {
+  exit('不正なアクセスです');
+}
 
-$sql = "SELECT * FROM recommend WHERE id = :recommend_id";
+$post_id = (int)$_GET['post_id'];
+$recommend_id = (int)$_GET['recommend_id'];
+
+
+
+$sql = "SELECT * FROM posts WHERE id = :post_id";
 $statement = $pdo->prepare($sql);
-$statement->bindValue(':recommend_id', $recommend_id, PDO::PARAM_INT);
+$statement->bindValue(':post_id',$post_id, PDO::PARAM_INT);
 $statement->execute();
-$recommend = $statement->fetch(PDO::FETCH_ASSOC);
+$post = $statement->fetch(PDO::FETCH_ASSOC);
 
-if (!$recommend) {
-  exit('指定されたレコメンドが見つかりません');
+
+if (!$post) {
+  exit('指定されたコメントが見つかりません');
 }
 
 
-$sql = "SELECT * FROM posts WHERE recommend_id = :recommend_id";
+$sql = "SELECT * FROM comment WHERE post_id = :post_id";
 $statement = $pdo->prepare($sql);
-$statement->bindValue(':recommend_id',$recommend_id, PDO::PARAM_INT);
+$statement->bindValue(':post_id', $post_id, PDO::PARAM_INT);
 $statement->execute();
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+$comments = $statement->fetchALL(PDO::FETCH_ASSOC);
 
 
 
@@ -48,29 +55,33 @@ if(empty($error_message)) {
 
   $post_date = date("Y-m-d H:i:s");
 
-  $sql = "INSERT INTO `posts` (`recommend_id`, `userName`, `content`,`created_at`) VALUES (:recommend_id, :userName,:content,:created_at);";
+  $sql = "INSERT INTO `comment` (`post_id`, `userName`, `content`,`comment_date`) VALUES (:post_id, :userName,:content,:comment_date);";
 
   $statement = $pdo->prepare($sql);
 
-  $statement->bindParam(":recommend_id",$recommend_id,PDO::PARAM_STR);
+  $statement->bindParam(":post_id",$post_id,PDO::PARAM_INT);
 
   $statement->bindParam(":userName", $escaped["userName"],PDO::PARAM_STR);
 
-  $statement->bindParam(":created_at", $post_date,PDO::PARAM_STR);
+  $statement->bindParam(":comment_date", $post_date,PDO::PARAM_STR);
 
   $statement->bindParam(":content", $escaped["content"],PDO::PARAM_STR);
 
 
   $statement->execute();
 
-  header("Location: recommendDetail.php?id=" . $recommend_id);
+  header("Location: comment.php?post_id=" . $post_id . "&recommend_id=" . $recommend_id);
+
   exit;
 
 }
 
 }
 
+
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -81,7 +92,7 @@ if(empty($error_message)) {
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/detail.css">
   <link rel="stylesheet" href="smart.css">
-  <title><?php echo $recommend["title"]; ?></title>
+  <title>返信</title>
 </head>
 <body>
   <header class="header">
@@ -90,36 +101,32 @@ if(empty($error_message)) {
       <h1 class="title"><a href="index.php">myレコ</a></h1>
     </div>
   </header>
-<body>
+
 
 <div class="recommendWrapper">
  <div class="recommendArea">
 
 
   <div class="titleArea">
-              <span>タイトル：</span>
-              <p class=""><?php echo $recommend["title"]; ?></p>
+
               <span>投稿者：</span>
-              <p class=""><?php echo $recommend["userName"]; ?></p>
-              <time >：<?php echo $recommend["post_date"]; ?></time>
-            </div>
+              <p class=""><?php echo $post["userName"]; ?></p>
+              <time >：<?php echo $post["created_at"]; ?></time>
+  </div>
   </div>
 
 
   <div class="recommend">
-    <ol>
-      <li><?php echo $recommend["recommend1"]; ?></li>
-      <li><?php echo $recommend["recommend2"]; ?></li>
-      <li><?php echo $recommend["recommend3"]; ?></li>
-    </ol>
+
   <span>メッセージ：</span>
-  <p class=""><?php echo $recommend["message"]; ?></p>
+  <p class=""><?php echo $post["content"]; ?></p>
   </div>
 </div>
 </div>
 <hr>
 <h3>コメントを書き込む</h3>
-<form action="recommendDetail.php?id=<?php echo $recommend_id; ?>" class="commentForm" method="POST">
+<form action="comment.php?post_id=<?php echo $post_id; ?>&recommend_id=<?php echo $recommend_id; ?>" class="commentForm" method="POST">
+
     <span>名前：</span>
     <input type="text" name="userName">
     <span>コメント：</span>
@@ -139,20 +146,19 @@ if(empty($error_message)) {
 <?php endif; ?>
 <hr>
   <section>
-    <?php foreach ($posts as $post) : ?>
+    <?php foreach ($comments as $comment) : ?>
       <article>
         <div class ="creatorWrapper">
             <span>投稿者：</span>
-            <p class=""><?php echo $post["userName"]; ?></p>
-            <time >：<?php echo $post["created_at"]; ?></time>
+            <p class=""><?php echo $comment["userName"]; ?></p>
+            <time >：<?php echo $comment["comment_date"]; ?></time>
           </div>
             <span>コメント：</span>
-            <p class=""><?php echo $post["content"]; ?></p>
-            <a href="./comment.php?post_id=<?php echo $post['id']; ?>&recommend_id=<?php echo $recommend_id; ?>">返信</a>
-
-        <hr>
-      </article>
-    <?php endforeach ?>
+            <p class=""><?php echo $comment["content"]; ?></p>
+            <hr>
+          </article>
+          <?php endforeach ?>
+          <a href="./recommendDetail.php?id=<?php echo $recommend_id; ?>">戻る</a>
   </section>
 
 </body>

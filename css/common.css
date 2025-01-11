@@ -1,0 +1,49 @@
+.header {
+  display: flex;               /* フレックスボックスで整列 */
+  justify-content: space-between; /* 左右に配置 */
+  align-items: center;         /* 垂直方向で中央揃え */
+  padding: 10px 20px;          /* 内側の余白 */
+  background-color: #f8f9fa;   /* ヘッダー背景色（適宜変更） */
+  border-bottom: 2px solid #ddd; /* 下部に線 */
+  max-width: 1300px;
+  height: 60px;
+}
+
+/* ロゴのスタイル */
+.header-logo .title {
+  font-size: 24px;             /* ロゴの文字サイズ */
+  font-weight: bold;           /* 太字 */
+  margin: 0;                   /* 余白をなくす */
+}
+
+.header-logo .title a {
+  text-decoration: none;       /* リンクの下線を消す */
+  color: #333;                 /* ロゴの文字色 */
+}
+
+.header-list {
+  padding: 10px 20px;
+}
+
+/* リストのスタイル */
+.header-list .register {
+  margin: 0;                   /* 余白をなくす */
+  font-size: 16px;
+}
+
+.header-list .register a {
+  display: block;               /* リンクをブロック要素に変更 */
+  text-decoration: none;        /* 下線を消す */
+  padding: 10px 20px;           /* リンク内の余白を広げる */
+  background-color: #007bff;    /* 背景色を追加 */
+  color: #fff;                  /* リンクの文字色 */
+  border-radius: 5px;           /* 角を丸める */
+  text-align: center;           /* テキストを中央揃え */
+}
+
+.header-list .register a:hover {
+  color: #0056b3;              /* リンクのホバー時の色 */
+}
+
+
+

@@ -1,0 +1,120 @@
+
+
+
+
+/* セクション全体 */
+section {
+  padding: 20px;
+  background-color: #f8f9fa; /* 背景色を設定 */
+}
+
+.linkWrapper {
+  display: block;               /* ブロック要素化 */
+  text-decoration: none;        /* デフォルトのリンクスタイルを消す */
+  color: inherit;               /* 親の文字色を継承 */
+}
+
+.linkWrapper:hover {
+  background-color: #f0f8ff;    /* ホバー時の背景色を追加 */
+  transition: background-color 0.2s; /* スムーズな背景色変更 */
+}
+
+/* 各記事（article）のスタイル */
+.recommendArticle {
+  background-color: #ffffff; /* 背景白 */
+  border: 1px solid #ddd;    /* 薄い枠線 */
+  border-radius: 8px;        /* 角を丸める */
+  margin-bottom: 20px;       /* 各記事間の余白 */
+  padding: 15px;             /* 内側余白 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+  overflow: hidden;
+}
+
+.recommendArticle:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時の影 */
+  transform: translateY(-2px);              /* ホバー時に少し浮き上がる */
+}
+
+/* 各投稿のラッパー */
+.postWrapper {
+  display: flex;
+  flex-direction: column;    /* 縦方向に整列 */
+}
+
+/* 投稿エリア全体 */
+.postArea {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;                 /* 各要素間の余白 */
+}
+
+/* タイトルエリア */
+.titleArea {
+  display: flex;
+  flex-wrap: wrap;           /* 横幅が足りない場合に折り返し */
+  gap: 10px;                 /* 各要素の間隔 */
+  font-size: 14px;           /* ベースフォントサイズ */
+}
+
+.titleArea span {
+  font-weight: bold;         /* ラベル部分を太字に */
+  color: #555;
+}
+
+.titleArea p {
+  margin: 0;                 /* 余白をリセット */
+}
+
+.recommendTitle a {
+  text-decoration: none;     /* リンクの下線を消す */
+  color: #007bff;            /* リンクの青色 */
+}
+
+.recommendTitle a:hover {
+  text-decoration: underline; /* ホバー時に下線を追加 */
+  color: #0056b3;            /* 少し濃い青 */
+}
+
+.userName {
+  font-style: italic;        /* 投稿者名を斜体に */
+  color: #333;
+}
+
+time {
+  color: #999;               /* 日時の文字色を薄く */
+  font-size: 12px;           /* 少し小さめに */
+}
+
+/* レコメンドリスト */
+.recommend {
+  background-color: #f0f8ff; /* リスト部分の背景を淡い青色に */
+  padding: 10px;             /* 内側の余白 */
+  border-left: 3px solid #007bff; /* 左側にアクセントライン */
+}
+
+.recommend ol {
+  padding-left: 20px;        /* リストの左余白 */
+  margin: 0;
+}
+
+.recommend li {
+  margin-bottom: 5px;        /* 各リスト項目の間隔 */
+  font-size: 14px;           /* リスト項目のサイズ */
+  color: #333;
+}
+
+/* コメント数 */
+.postArea span:last-child {
+  font-weight: bold;         /* コメント数のラベルを強調 */
+  color: #555;
+}
+
+.postArea p:last-child {
+  font-size: 14px;
+  color: #007bff;
+  margin: 0;
+}
+
+
+
+

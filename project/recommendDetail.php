@@ -1,6 +1,6 @@
 <?php
 
-include("connect.php");
+include("../database/connect.php");
 
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
   exit('不正なアクセスです');
@@ -78,15 +78,23 @@ if(empty($error_message)) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/detail.css">
+  <link rel="stylesheet" href="smart.css">
   <title>レコメンド投稿</title>
 </head>
 <body>
-  <header>
-    <h1 class="title"><a href="index.php">myレコ</a></h1>
+  <header class="header">
+    <div class="header-logo">
+
+      <h1 class="title"><a href="index.php">myレコ</a></h1>
+    </div>
   </header>
 <body>
 
 <div class="recommendWrapper">
+ <div class="recommendArea">
+
 
   <div class="titleArea">
               <span>タイトル：</span>
@@ -107,6 +115,7 @@ if(empty($error_message)) {
   <span>メッセージ：</span>
   <p class=""><?php echo $recommend["message"]; ?></p>
   </div>
+</div>
 </div>
 <hr>
 <h3>コメントを書き込む</h3>
@@ -132,13 +141,13 @@ if(empty($error_message)) {
   <section>
     <?php foreach ($posts as $post) : ?>
       <article>
-        <div class ="wrapper">
+        <div class ="creatorWrapper">
             <span>投稿者：</span>
             <p class=""><?php echo $post["userName"]; ?></p>
             <time >：<?php echo $post["created_at"]; ?></time>
+          </div>
             <span>コメント：</span>
             <p class=""><?php echo $post["content"]; ?></p>
-        </div>
         <hr>
       </article>
     <?php endforeach ?>

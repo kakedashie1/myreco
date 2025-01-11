@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../database/connect.php");
 
 $error_message = array();
 
@@ -71,11 +71,16 @@ if(empty($error_message)) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/create.css">
   <title>レコメンド投稿</title>
 </head>
 <body>
-  <header>
-    <h1 class="title"><a href="index.php">myレコ</a></h1>
+  <header class="header">
+    <div class="header-logo">
+
+      <h1 class="title"><a href="index.php">myレコ</a></h1>
+    </div>
   </header>
 <form class="formWrapper" method="POST">
   <div class="titleWrapper">
@@ -84,7 +89,7 @@ if(empty($error_message)) {
       <input type="text" name="recommendTitle">
     </div>
     <div class="creator">
-      <h3>投稿者：</h3>
+      <h3>投稿者</h3>
       <input type="text" name="userName">
     </div>
     <hr>

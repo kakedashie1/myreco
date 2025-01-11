@@ -1,0 +1,226 @@
+.recommendWrapper {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトルエリア */
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleArea span {
+  font-weight: bold;
+  color: #555;
+}
+
+.titleArea p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* レコメンドリスト */
+.recommend ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.recommend li {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* コメントフォーム */
+.commentForm {
+  margin: 20px auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commentForm span {
+  font-weight: bold;
+}
+
+.commentForm input[type="text"],
+.commentForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.commentForm input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.commentForm input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* コメント一覧 */
+section article {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section article span {
+  font-weight: bold;
+}
+
+section article p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+section article time {
+  color: #999;
+  font-size: 12px;
+}
+
+.creatorWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* エラーメッセージ */
+.errorMessage {
+  color: red;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.errorMessage li {
+  margin-bottom: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .recommendWrapper {
+    padding: 15px;
+    margin: 15px;
+  }
+
+  .titleArea {
+    flex-direction: column; /* 横並びから縦並びに変更 */
+    gap: 5px;
+  }
+
+  .titleArea span {
+    font-size: 14px; /* ラベルのフォントを少し小さく */
+  }
+
+  .titleArea p {
+    font-size: 14px; /* タイトルのフォントを調整 */
+  }
+
+  .recommend li {
+    font-size: 13px; /* リストのフォントを小さく */
+    margin-bottom: 3px;
+  }
+
+  .commentForm {
+    padding: 10px;
+  }
+
+  .commentForm input[type="text"],
+  .commentForm textarea {
+    font-size: 13px; /* フォームのフォントサイズを縮小 */
+  }
+
+  .commentForm input[type="submit"] {
+    font-size: 13px;
+    padding: 8px 10px; /* ボタンのパディングを縮小 */
+  }
+
+  section article {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  section article span {
+    font-size: 14px;
+  }
+
+  section article p {
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .recommendWrapper {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px; /* 角丸を小さく */
+  }
+
+  .titleArea {
+    flex-direction: column; /* 完全に縦並びに */
+    align-items: flex-start; /* 左寄せに */
+    gap: 5px;
+  }
+
+  .titleArea span {
+    font-size: 12px; /* ラベルのフォントをさらに小さく */
+  }
+
+  .titleArea p {
+    font-size: 12px;
+  }
+
+  .recommend li {
+    font-size: 12px; /* リストのフォントを縮小 */
+    margin-bottom: 2px;
+  }
+
+  .commentForm input[type="text"],
+  .commentForm textarea {
+    font-size: 12px; /* フォームのフォントサイズをさらに縮小 */
+    padding: 8px;
+  }
+
+  .commentForm input[type="submit"] {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  section article {
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+
+  section article span {
+    font-size: 12px;
+  }
+
+  section article p {
+    font-size: 12px;
+  }
+
+  .creatorWrapper {
+    flex-direction: column; /* 横並びを縦並びに変更 */
+    align-items: flex-start;
+    gap: 5px;
+  }
+}

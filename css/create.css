@@ -1,0 +1,137 @@
+/* デフォルトスタイル（PC向け） */
+.formWrapper {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.titleWrapper,
+.recommendWrapper {
+  margin-bottom: 20px;
+}
+
+.recommendTitle,
+.creator {
+  margin-bottom: 15px;
+}
+
+.recommendTitle h2,
+.creator h3,
+.recommend h3,
+.message h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.recommend ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.recommend li {
+  margin-bottom: 10px;
+}
+
+.createWrapper {
+  text-align: center;
+}
+
+.create input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.errorMessage {
+  color: #ff0000;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.errorMessage li {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* レスポンシブ対応 */
+
+/* タブレット（768px以下） */
+@media (max-width: 768px) {
+  .formWrapper {
+    padding: 15px;
+  }
+
+  .recommendTitle h2,
+  .creator h3,
+  .recommend h3,
+  .message h3 {
+    font-size: 16px; /* 少しフォントを小さく */
+  }
+
+  input[type="text"],
+  textarea {
+    font-size: 13px; /* フォントサイズを縮小 */
+  }
+
+  .create input[type="submit"] {
+    font-size: 14px; /* ボタンサイズを調整 */
+    padding: 8px 15px;
+  }
+}
+
+/* スマートフォン（480px以下） */
+@media (max-width: 480px) {
+  .formWrapper {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .recommendTitle h2,
+  .creator h3,
+  .recommend h3,
+  .message h3 {
+    font-size: 14px; /* さらにフォントを小さく */
+  }
+
+  input[type="text"],
+  textarea {
+    font-size: 12px;
+    padding: 8px; /* 内側の余白を縮小 */
+  }
+
+  .create input[type="submit"] {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}

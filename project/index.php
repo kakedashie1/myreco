@@ -1,16 +1,29 @@
 <?php
 include_once("../database/connect.php");
 
+$sql = "SELECT r.*,
+           IFNULL(p.posts_count, 0) AS posts_count,
+           IFNULL(c.comments_count, 0) AS comments_count,
+           (IFNULL(p.posts_count, 0) + IFNULL(c.comments_count, 0)) AS total_comments_count
+    FROM recommend r
+    LEFT JOIN (
+        SELECT recommend_id, COUNT(*) AS posts_count
+        FROM posts
+        GROUP BY recommend_id
+    ) p ON r.id = p.recommend_id
+    LEFT JOIN (
+        SELECT p.recommend_id, COUNT(c.id) AS comments_count
+        FROM posts p
+        LEFT JOIN comment c ON p.id = c.post_id
+        GROUP BY p.recommend_id
+    ) c ON r.id = c.recommend_id
+    ORDER BY total_comments_count DESC, r.post_date DESC
+";
 
 
-$recommend_array = array();
-
-$sql = "SELECT r.*, COUNT(p.id) AS posts_count  FROM recommend r LEFT JOIN posts p ON r.id = p.recommend_id GROUP BY r.id ORDER BY posts_count DESC, r.post_date DESC";
 $statement = $pdo->prepare($sql);
 $statement->execute();
-
-$recommend_array = $statement;
-
+$recommend_array = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -55,8 +68,9 @@ $recommend_array = $statement;
                 <li><?php echo $recommend["recommend3"]; ?></li>
               </ol>
             </div>
-            <span>コメント数</span>
-            <p><?php echo $recommend["posts_count"]; ?></p>
+            
+            <span>コメント数：</span>
+                            <p><?php echo htmlspecialchars($recommend["total_comments_count"], ENT_QUOTES, 'UTF-8'); ?></p>
           </div>
         </div>
       </a>

@@ -19,7 +19,27 @@ if (!$recommend) {
 }
 
 
-$sql = "SELECT * FROM posts WHERE recommend_id = :recommend_id";
+$sql = "SELECT
+    p.*,
+    IFNULL(c.comments_count, 0) AS comments_count
+FROM
+    posts p
+LEFT JOIN (
+    SELECT
+        post_id,
+        COUNT(*) AS comments_count
+    FROM
+        comment
+    GROUP BY
+        post_id
+) c ON p.id = c.post_id
+WHERE
+    p.recommend_id = :recommend_id
+ORDER BY
+    p.created_at ASC";
+
+
+
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':recommend_id',$recommend_id, PDO::PARAM_INT);
 $statement->execute();
@@ -149,6 +169,8 @@ if(empty($error_message)) {
             <span>コメント：</span>
             <p class=""><?php echo $post["content"]; ?></p>
             <a href="./comment.php?post_id=<?php echo $post['id']; ?>&recommend_id=<?php echo $recommend_id; ?>">返信</a>
+            <span>コメント数：</span>
+            <p><?php echo htmlspecialchars($post["comments_count"], ENT_QUOTES, 'UTF-8'); ?></p>
 
         <hr>
       </article>
